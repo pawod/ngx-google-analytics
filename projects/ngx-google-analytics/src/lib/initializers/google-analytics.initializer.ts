@@ -58,16 +58,16 @@ export function GoogleAnalyticsInitializer(
     // these commands should run first!
     settings.initCommands = settings?.initCommands ?? [];
 
-    // assert config command
-    if (!settings.initCommands.find(x => x.command === 'config'))
-    {
-      settings.initCommands.unshift({ command: 'config', values: [ settings.trackingCode ] })
-    }
-
     // assert js command
     if (!settings.initCommands.find(x => x.command === 'js'))
     {
       settings.initCommands.unshift({ command: 'js', values: [ new Date() ] })
+    }
+
+    // assert config command
+    if (!settings.initCommands.find(x => x.command === 'config'))
+    {
+      settings.initCommands.push({ command: 'config', values: [ settings.trackingCode ] })
     }
 
     for (const command of settings.initCommands) {
